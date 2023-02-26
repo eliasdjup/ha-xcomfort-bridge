@@ -6,7 +6,7 @@ from xcomfort.devices import Shade
 
 from homeassistant.components.cover import (
     CoverEntityFeature,
-    DEVICE_CLASS_SHADE,
+    CoverDeviceClass,
     CoverEntity,
 )
 from homeassistant.config_entries import ConfigEntry
@@ -62,7 +62,7 @@ class HASSXComfortShade(CoverEntity):
         self._state = None
         self.device_id = device.device_id
 
-        self.device_class = DEVICE_CLASS_SHADE
+        self.device_class = CoverDeviceClass.SHADE
 
         self._unique_id = f"shade_{DOMAIN}_{hub.identifier}-{device.device_id}"
 
@@ -116,7 +116,7 @@ class HASSXComfortShade(CoverEntity):
     async def async_open_cover(self, **kwargs):
         """Open the cover."""
         await self._device.move_up()
-    
+
     async def async_close_cover(self, **kwargs):
         """Close cover."""
         await self._device.move_down()
